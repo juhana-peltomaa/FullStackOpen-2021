@@ -11,6 +11,6 @@ ___
 * [Exercise 0.6](https://github.com/juhana-peltomaa/FullStackHY/tree/master/part0/0.6)
 
 ### [Part 1](https://github.com/juhana-peltomaa/FullStackHY/tree/master/part1)
-* [Course Informatio](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part1/courseinfo)
+* [Course Information](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part1/courseinfo)
 * [Unicafe](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part1/unicafe)
 * [Anecdotes](https://github.com/juhana-peltomaa/FullStackHY/tree/master/part1/anecdotes)
