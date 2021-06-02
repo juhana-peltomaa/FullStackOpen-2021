@@ -25,6 +25,20 @@ const Button = (promps) => (
   </button>
 )
 
+const Statistics = (promps) => {
+  console.log(promps)
+  return (
+      <div>
+        <p> good {promps.good} </p>
+        <p> neutral {promps.neutral}</p>
+        <p> bad {promps.bad}</p>
+        <p> all {promps.all}</p>
+        <p> average {promps.average}</p>
+        <p> positive {promps.positive * 100} %</p>
+      </div>
+      )
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -50,22 +64,24 @@ const App = () => {
   }
 
 
-
+  let values = {
+    good: good,
+    neutral: neutral,
+    bad: bad,
+    all: allReviews,
+    average: (good-bad)/allReviews,
+    positive: good/allReviews
+  }
 
   return (
+    
     <div>
       <Header value="give feedback" />
       <Button handleClick={() => setToGood(good + 1)} text="good" />
       <Button handleClick={() => setToNeutral(neutral + 1)} text="neutral" />
       <Button handleClick={() => setToBad(bad + 1)} text="bad" />
       <Header value="statistics" />
-      
-      <Display value={good} text="good" />
-      <Display value={neutral} text="neutral" />
-      <Display value={bad} text="bad" />
-      <Display value={allReviews} text="all" />
-      <Display value={(good-bad)/allReviews} text="average" />
-      <Display value={good/allReviews} text="positive"/>
+      <Statistics {...values} />
     </div>
   )
 }
