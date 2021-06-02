@@ -17,22 +17,28 @@ const Statistics = (promps) => {
     )
   }
   return (
-      <div>
+    <table>
+      <tbody>
         <Statistic text="good" value={promps.good} />
         <Statistic text="neutral" value={promps.neutral}/>
         <Statistic text="bad" value={promps.bad}/>
         <Statistic text="all" value={promps.all}/>
         <Statistic text="average" value={promps.average}/>
         <Statistic text="positive" value={promps.positive * 100}/>
-      </div>
+        </tbody>
+    </table> 
       )
 }
 
 const Statistic = (promps) => {
   if (promps.text === "positive") {
-    return <div>{promps.text} {promps.value} %</div>
+    return <tr>
+      <td>{promps.text}</td><td>{promps.value} %</td>
+    </tr>
   }
-  return <div>{promps.text} {promps.value}</div>
+  return <tr>
+    <td>{promps.text}</td><td>{promps.value}</td>
+  </tr>
 }
 
 const App = () => {
