@@ -1,0 +1,10 @@
+note over selain:
+POST pyynto sisältää käyttäjän antaman uuden muistiinpanon JSON-muodossa,
+joka sisältää (content) ja (date). Palvelin vastaa statuskoodilla 201,
+jolloin selain pysyy samalla sivulla, eikä muita HTTP-pyyntöjä suoriteta.
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+palvelin-->selain: Statuskoodi 201
+
