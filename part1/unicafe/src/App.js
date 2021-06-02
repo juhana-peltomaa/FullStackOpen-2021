@@ -26,7 +26,11 @@ const Button = (promps) => (
 )
 
 const Statistics = (promps) => {
-  console.log(promps)
+  if (promps.all === 0) {
+    return (
+      <div>No feedback given</div>
+    )
+  }
   return (
       <div>
         <p> good {promps.good} </p>
