@@ -1,20 +1,5 @@
 import React, { useState } from 'react'
 
-const Display = (promps) => {
-  if (promps.text === "positive")  {
-    return (
-      <div>
-         {promps.text} {100 * promps.value} % 
-      </div>
-    )
-  }
-return (
-    <div>
-      {promps.text} {promps.value}
-    </div>
-  )
-}
-
 const Header = ({ value }) => (
   <h1>{value}</h1>
 )
@@ -33,14 +18,21 @@ const Statistics = (promps) => {
   }
   return (
       <div>
-        <p> good {promps.good} </p>
-        <p> neutral {promps.neutral}</p>
-        <p> bad {promps.bad}</p>
-        <p> all {promps.all}</p>
-        <p> average {promps.average}</p>
-        <p> positive {promps.positive * 100} %</p>
+        <Statistic text="good" value={promps.good} />
+        <Statistic text="neutral" value={promps.neutral}/>
+        <Statistic text="bad" value={promps.bad}/>
+        <Statistic text="all" value={promps.all}/>
+        <Statistic text="average" value={promps.average}/>
+        <Statistic text="positive" value={promps.positive * 100}/>
       </div>
       )
+}
+
+const Statistic = (promps) => {
+  if (promps.text === "positive") {
+    return <div>{promps.text} {promps.value} %</div>
+  }
+  return <div>{promps.text} {promps.value}</div>
 }
 
 const App = () => {
