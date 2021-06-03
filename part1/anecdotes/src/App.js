@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Button = (props) => (
   <button onClick={props.handleClick}>
-    next anecdote
+    {props.text}
   </button>
 )
 
@@ -23,19 +23,28 @@ const App = () => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
   }
+  
 
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
+ 
 
+  const copy = [...points]
   const setToSelected = (newAnecdote) => {
     setSelected(newAnecdote)
   }
 
-  
-
+  const setToPoints = (newVote) => {
+    console.log(copy)
+    copy[newVote]+=1
+    setPoints(copy)
+  }
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <Button handleClick={() => setToSelected(getRandomInt(0, anecdotes.length)) } />
+      <p>has {points[selected]} votes</p>
+      <Button handleClick={() => setToSelected(getRandomInt(0, anecdotes.length))} text="next anecdote"  />
+      <Button handleClick={() => setToPoints(selected)} text="vote" />
     </div>
   )
 }
