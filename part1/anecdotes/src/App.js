@@ -39,12 +39,26 @@ const App = () => {
     copy[newVote]+=1
     setPoints(copy)
   }
+
+  function getArrayMax(array){
+    return Math.max.apply(null, array);
+ }
+
+  const mostPoints = getArrayMax(points)
+  const indexMostPoints = points.indexOf(mostPoints)
+
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
+      <h2>Anexdote of the day</h2>
+      <p>{anecdotes[selected]} 
+      <br></br>
+      has {points[selected]} votes</p>
       <Button handleClick={() => setToSelected(getRandomInt(0, anecdotes.length))} text="next anecdote"  />
       <Button handleClick={() => setToPoints(selected)} text="vote" />
+      <h2>Anexdote with the most votes</h2>
+      <p>{ anecdotes[indexMostPoints] }
+      <br></br>
+      has {mostPoints} votes</p>
     </div>
   )
 }
