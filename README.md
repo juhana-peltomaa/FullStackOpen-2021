@@ -2,7 +2,7 @@
 
 This repository contains exercises for the [Full Stack open 2021](https://fullstackopen.com/en/) edition @ the University of Helsinki.
 
-*For your convenience, all exercises can be found below*
+*For convenience, all completed exercises can be found below*
 ___
 
 ### [Part 0](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part0)
