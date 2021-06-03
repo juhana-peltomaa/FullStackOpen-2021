@@ -1,8 +1,0 @@
-commit 0399d0f8c724a6aab1f42aa8b6821a46c0dac3b6
-Author: Juhki <juhana.peltomaa@helsinki.fi>
-Date:   Sat Dec 19 19:37:43 2020 +0200
-
-    initial commit
-
- README.md | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
