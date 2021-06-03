@@ -14,3 +14,5 @@ ___
 * [Course Information](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part1/courseinfo)
 * [Unicafe](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part1/unicafe)
 * [Anecdotes](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part1/anecdotes)
+
+### Part 2
