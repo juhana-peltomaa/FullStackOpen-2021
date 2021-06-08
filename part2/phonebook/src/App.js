@@ -15,16 +15,12 @@ const App = () => {
 
   
   useEffect(() => {
-    console.log("effect here")
     axios
     .get('http://localhost:3001/persons')
     .then(response => {
-      console.log("promise here")
       setPersons(response.data)
-      console.log(persons)
   })
 }, [])
-console.log("new persons", persons.length)
 
 
   const setToNewName = (e) => {
