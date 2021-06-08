@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-
 const Country = (props) => {
-  if (props.country.length > 10) {
-    return (
-      <p>Too many results, specifcy another filter</p>
-    )
-  } else if (props.country.length === 1) {
-    return (
+  console.log(props)
+  return (
       props.country.map(country => 
       <div key={country.name}> 
       <h2> {country.name} </h2>
@@ -18,14 +13,28 @@ const Country = (props) => {
       <ul>
         {country.languages.map(language => <li key={language.iso639_1}>{language.name}</li>)}
       </ul>
-      <img src={`https://restcountries.eu/data/${country.cioc.toLowerCase()}.svg`} alt={`Flag of ${country.name}`} width="200" heigth="300"></img>
+      <img src={`https://restcountries.eu/data/${country.alpha3Code.toLowerCase()}.svg`} alt={`Flag of ${country.name}`} width="200" heigth="300"></img>
       </div>
       )
+  )
+}
+
+const Countries = (props) => {
+
+  if (props.country.length > 10) {
+    return (
+      <p>Too many results, specifcy another filter</p>
     )
+  } else if (props.country.length === 1) {
+    return (
+      <Country country={props.country} />
+      )
 
   } else {
       return (
-        props.country.map(country => <p key={country.name}> {country.name} </p>)
+        <div>
+          {props.country.map(country => <p key={country.name}> {country.name} <button value={country.name} onClick={props.handleClick}>show</button> </p>)}
+        </div>
       )
   }
 }
@@ -55,13 +64,18 @@ function App() {
   ? countries
   : countries.filter(countries=> countries.name.toLowerCase().includes(filter.toLowerCase()))
 
+  const handleClick = (e) => {
+    console.log(e.target.value)
+    setFilter(e.target.value)
+  }
+
   return (
     <div>
       <div>
         find countries: <input value={filter} onChange={handleFilter} />
       </div>
       <div>
-        <Country country = {countriesToShow} />
+        <Countries country = {countriesToShow} handleClick={handleClick} />
       </div>
     </div>
   );
