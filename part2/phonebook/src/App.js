@@ -32,9 +32,25 @@ const App = () => {
     }
 
     const names = persons.map(person => person.name)
+    const id = persons.filter(person => person.name === newName).map(person => person.id)
 
     if (names.includes(newName)) {
-      window.alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        
+        personService
+          .update(personObject, id.toString())
+          .then(response => {
+            personService
+              .getAll()
+              .then(initialPersons => {
+                setPersons(initialPersons)
+            })
+        })
+        
+        
+        
+          
+      } 
     } else {
       personService
         .create(personObject)
@@ -66,24 +82,26 @@ const App = () => {
 
   const handleDelete = (e) => {
 
-  if (window.confirm(`Delete ${e.target.value} ?`)) {
+    if (window.confirm(`Delete ${e.target.value} ?`)) {
 
-    const currentPerson  = {
-      id: e.target.id,
-      name: e.target.value,
-      number: e.target.number
-    }
+      const currentPerson  = {
+        id: e.target.id,
+        name: e.target.value,
+        number: e.target.number
+      }
 
-    personService
-    .deletePerson(currentPerson)
-    
-    personService
-      .getAll()
-      .then(initialPersons => {
-        setPersons(initialPersons)
+      personService
+      .deletePerson(currentPerson)          
+      .then(response => {
+        personService
+          .getAll()
+          .then(initialPersons => {
+            setPersons(initialPersons)
+          })
       })
     }
   }
+  
 
   return (
     <div>
