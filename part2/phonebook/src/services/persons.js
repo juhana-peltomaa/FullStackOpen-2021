@@ -29,9 +29,12 @@ const update = (personObject, id) => {
         number: personObject.number,
         id: id
 
-    }).then(response => {
     })
-    return request
+    
+    return request.then(response => {
+        return response.status
+    })
+    
 }
 
 

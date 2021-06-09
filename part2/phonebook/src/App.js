@@ -4,6 +4,47 @@ import Filter from './components/Filter'
 import Person from './components/Person'
 import personService from './services/persons'
 
+const Notification = ({ message }) => {
+
+  const notificationStyle = {
+    color: 'green',
+    background: 'lightgrey',
+    borderStyle: 'solid',
+    fontSize: 20,
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10
+  }
+
+  const errorStyle = {
+    color: 'red',
+    background: 'lightgrey',
+    borderStyle: 'solid',
+    fontSize: 20,
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10
+  }
+
+  if (message === null) {
+    return null
+  }
+
+  if (message.includes("server")) {
+    return (
+      <div style={errorStyle}>
+        {message}
+      </div>
+    )
+  } else {
+    return (
+      <div style={notificationStyle}>
+        {message}
+      </div>
+    )
+  }
+}
+
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -13,6 +54,8 @@ const App = () => {
   const [ showAll, setShowAll ] = useState(true)
   const [ filtteri, setFilter ] = useState('')
   const [ popMessage, setPopMessage] = useState(null)
+  const [ errorMessage, setErrorMessage] = useState(null)
+
 
   
   useEffect(() => {
@@ -23,27 +66,6 @@ const App = () => {
   })
 }, [])
 
-  const Notification = ({ message }) => {
-    const notificationStyle = {
-      color: 'green',
-      background: 'lightgrey',
-      borderStyle: 'solid',
-      fontSize: 20,
-      borderRadius: 5,
-      padding: 10,
-      marginBottom: 10
-    }
-  
-    if (message === null) {
-      return null
-    }
-
-    return (
-      <div style={notificationStyle}>
-        {message}
-      </div>
-    )
-  }
 
   const setToNewName = (e) => {
     e.preventDefault()
@@ -60,21 +82,33 @@ const App = () => {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         
         personService
-          .update(personObject, id.toString())
+          .update(personObject, id.toString()) 
           .then(response => {
-            personService
-              .getAll()
-              .then(initialPersons => {
-                setPersons(initialPersons)
+            console.log(response)
+            if (response === 200) {
+              setPopMessage(
+                `${newName}'s number was successfully updated!`
+                )
+                setTimeout(() => {
+                  setPopMessage(null)
+                }, 3000)
+              }
+            }).catch(error => {
+              setErrorMessage(
+                `Note '${newName}' was already removed from server`
+              )
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+             }).then(response => {
+              personService
+                .getAll()
+                .then(initialPersons => {
+                  setPersons(initialPersons)
             })
-
+            
         })
-        setPopMessage(
-          `${newName}'s number was successfully updated!`
-          )
-          setTimeout(() => {
-            setPopMessage(null)
-          }, 3000)
+
       } 
     } else {
       personService
@@ -140,6 +174,8 @@ const App = () => {
       <h2>Phonebook</h2>
 
       <Notification message={popMessage}/>
+      <Notification message={errorMessage}/>
+
 
       <Filter filtteri={filtteri} handleFilter={handleFilter} />
 
