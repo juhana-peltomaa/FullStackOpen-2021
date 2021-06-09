@@ -64,6 +64,27 @@ const App = () => {
   ? persons
   : persons.filter(person => person.name.toLowerCase().includes(filtteri.toLowerCase()))
 
+  const handleDelete = (e) => {
+
+  if (window.confirm(`Delete ${e.target.value} ?`)) {
+
+    const currentPerson  = {
+      id: e.target.id,
+      name: e.target.value,
+      number: e.target.number
+    }
+
+    personService
+    .deletePerson(currentPerson)
+    
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+    }
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -77,7 +98,7 @@ const App = () => {
       <h2>Numbers</h2>
       <div>
         {personsToShow.map(person => 
-          <Person key={person.name} name={person.name} number={person.number} />)
+          <Person key={person.name} name={person.name} number={person.number} id={person.id} onClick={handleDelete}/>)
         }
       </div>
     </div>
