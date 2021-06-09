@@ -12,6 +12,7 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ showAll, setShowAll ] = useState(true)
   const [ filtteri, setFilter ] = useState('')
+  const [ popMessage, setPopMessage] = useState(null)
 
   
   useEffect(() => {
@@ -22,6 +23,27 @@ const App = () => {
   })
 }, [])
 
+  const Notification = ({ message }) => {
+    const notificationStyle = {
+      color: 'green',
+      background: 'lightgrey',
+      borderStyle: 'solid',
+      fontSize: 20,
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 10
+    }
+  
+    if (message === null) {
+      return null
+    }
+
+    return (
+      <div style={notificationStyle}>
+        {message}
+      </div>
+    )
+  }
 
   const setToNewName = (e) => {
     e.preventDefault()
@@ -45,11 +67,14 @@ const App = () => {
               .then(initialPersons => {
                 setPersons(initialPersons)
             })
+
         })
-        
-        
-        
-          
+        setPopMessage(
+          `${newName}'s number was successfully updated!`
+          )
+          setTimeout(() => {
+            setPopMessage(null)
+          }, 3000)
       } 
     } else {
       personService
@@ -58,6 +83,13 @@ const App = () => {
           setPersons(persons.concat(newPerson))
           setNewName('')
           setNewNumber('')
+          
+          setPopMessage(
+            `${newName} was successfully added!`
+            )
+            setTimeout(() => {
+              setPopMessage(null)
+            }, 3000)
         })
     }
   }
@@ -106,6 +138,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification message={popMessage}/>
 
       <Filter filtteri={filtteri} handleFilter={handleFilter} />
 
