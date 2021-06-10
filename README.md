@@ -20,4 +20,5 @@ ___
 * [Phonebook](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part2/phonebook)
 * [Countries](https://github.com/juhana-peltomaa/FullStackOpen-2021/tree/master/part2/countries)
 
-### [Part 3](https://github.com/juhana-peltomaa/FullStackOpen-part3) (NB! separate repository)
+### [Part 3](https://github.com/juhana-peltomaa/FullStackOpen-part3) 
+(NB! separate repository)
