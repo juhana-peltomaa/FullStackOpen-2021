@@ -4,7 +4,7 @@ import Filter from './components/Filter'
 import Person from './components/Person'
 import personService from './services/persons'
 
-const Notification = ({ message }) => {
+const Notification = ( props ) => {
 
   const notificationStyle = {
     color: 'green',
@@ -26,20 +26,20 @@ const Notification = ({ message }) => {
     marginBottom: 10
   }
 
-  if (message === null) {
+  if (props.message === null) {
     return null
   }
 
-  if (message.includes("server")) {
+  if (props.style === "error") {
     return (
       <div style={errorStyle}>
-        {message}
+        {props.message}
       </div>
     )
   } else {
     return (
       <div style={notificationStyle}>
-        {message}
+        {props.message}
       </div>
     )
   }
@@ -95,7 +95,7 @@ const App = () => {
               }
             }).catch(error => {
               setErrorMessage(
-                `Note '${newName}' was already removed from server`
+                `Person '${newName}' was already removed from server`
               )
               setTimeout(() => {
                 setErrorMessage(null)
@@ -124,6 +124,13 @@ const App = () => {
             setTimeout(() => {
               setPopMessage(null)
             }, 3000)
+        }).catch(error => {
+          setErrorMessage(
+            `${error.response.data.error}`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
     }
   }
@@ -173,8 +180,8 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      <Notification message={popMessage}/>
-      <Notification message={errorMessage}/>
+      <Notification message={popMessage} style="notification"/>
+      <Notification message={errorMessage} style="error"/>
 
 
       <Filter filtteri={filtteri} handleFilter={handleFilter} />
